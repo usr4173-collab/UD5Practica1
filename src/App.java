@@ -27,7 +27,7 @@ public class App {
             usuario.nextLine();
 
             switch (opcion) {
-                case 1: 
+                case 1:
                     System.out.println("Vamos a buscar un videojuego, ");
                     System.out.println("introduce el nombre: ");
                     String nombre = usuario.nextLine();
@@ -39,13 +39,24 @@ public class App {
                     String plataforma = usuario.nextLine();
 
                     System.out.println("Introduce la puntuación: ");
+
                     while (!usuario.hasNextInt()) {
                         System.out.println("Introduce un número válido");
-                        usuario.next(); //Esto valida que el usuario escriba si o si un número y no rompa el programa
+                        usuario.next(); // Esto valida que el usuario escriba si o si un número y no rompa el programa
                     }
 
                     int puntuacion = usuario.nextInt();
                     usuario.nextLine();
+
+                    while (puntuacion < 1 || puntuacion > 5) {
+
+                        System.out.println(
+                                "La puntuacion debe estar entre 1 y 5");
+
+                        puntuacion = usuario.nextInt();
+                        usuario.nextLine();
+
+                    }
 
                     Videojuego usuarioJuego = new Videojuego(nombre, genero, plataforma, puntuacion);
                     listaVideojuegos.add(usuarioJuego);
@@ -53,47 +64,82 @@ public class App {
                     System.out.println("Videojuego añadido.");
 
                     break;
-                
+
                 case 2:
 
-                    /*Investigué sobre cómo comparar y ordenar la lista sin escribir tanto código
-                    y podemos hacerlo importando las librerías Collection y Comparator*/
-                    Collections.sort(listaVideojuegos, Comparator.comparing(Videojuego::getPuntuacion).reversed());
+                    if (listaVideojuegos.isEmpty()) {
+                        System.out.println("No hay videojuegos aún.");
+                    } else {
 
-                    for (Videojuego juego : listaVideojuegos) {
-                        System.out.println(juego);
+                        /*
+                         * Investigué sobre cómo comparar y ordenar la lista sin escribir tanto código
+                         * y podemos hacerlo importando las librerías Collection y Comparator
+                         */
+
+                        Collections.sort(listaVideojuegos, Comparator.comparing(Videojuego::getPuntuacion).reversed());
+
+                        for (Videojuego juego : listaVideojuegos) {
+                            System.out.println(juego);
+                        }
                     }
-                    
-                break;
+
+                    break;
 
                 case 3: {
 
-                    for(int i = 0; i < listaVideojuegos.size(); i++) {
-                        System.out.println(i + " - " + listaVideojuegos.get(i).getNombre());
+                    if (listaVideojuegos.isEmpty()) {
+
+                        System.out.println(
+                                "No hay videojuegos para eliminar.");
+
+                    } else {
+                        for (int i = 0; i < listaVideojuegos.size(); i++) {
+                            System.out.println(i + " - " + listaVideojuegos.get(i).getNombre());
+                        }
+
+                        System.out.println("Introduce el número del juego que quieres borrar");
+
+                        while (!usuario.hasNextInt()) {
+
+                            System.out.println("Error. Introduce un numero valido:");
+
+                            usuario.next();
+
+                        }
+
+                        int juego = usuario.nextInt();
+                        usuario.nextLine();
+
+                        if (juego >= 0 &&
+                                juego < listaVideojuegos.size()) {
+
+                            listaVideojuegos.remove(juego);
+
+                            System.out.println(
+                                    "Se ha eliminado.");
+
+                        } else {
+
+                            System.out.println(
+                                    "Número no valido.");
+
+                        }
+
                     }
-
-                    System.out.println("Introduce el número del juego que quieres borrar");
-
-                    int juego = usuario.nextInt();
-                    usuario.nextLine();
-
-                    listaVideojuegos.remove(juego);
-
-                    System.out.println("Se ha eliminado.");
 
                     break;
                 }
-                
-                    case 4:
-                        System.out.println("Saliendo...");
 
-                        break;
+                case 4:
+                    System.out.println("Saliendo...");
+
+                    break;
 
                 default:
                     System.out.println("Opción  no válida.");
             }
         }
-        
+
         usuario.close();
 
         /*
