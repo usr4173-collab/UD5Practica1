@@ -43,16 +43,15 @@ public class App {
 
                     while (puntuacion < 1 || puntuacion > 5) {
 
-                        puntuacion =
-                            Integer.parseInt(
+                        puntuacion = Integer.parseInt(
 
                                 JOptionPane.showInputDialog(
 
-                                    "La puntuacion debe estar entre 1 y 5"
+                                        "La puntuacion debe estar entre 1 y 5"
 
                                 )
 
-                            );
+                        );
 
                     }
 
@@ -95,20 +94,30 @@ public class App {
 
                     if (listaVideojuegos.isEmpty()) {
 
-                        JOptionPane.showMessageDialog(null, "No hay videojuegos para eliminar.");
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No hay videojuegos para eliminar.");
 
                     } else {
+
                         String lista = "";
 
                         for (int i = 0; i < listaVideojuegos.size(); i++) {
-                            lista += i + " - " + listaVideojuegos.get(i).getNombre() + "\n";
+
+                            lista += i + " - " +
+                                    listaVideojuegos.get(i).getNombre()
+                                    + "\n";
+
                         }
-                            
 
                         int juego = Integer.parseInt(
 
                                 JOptionPane.showInputDialog(
-                                        "Introduce el numero del juego:")
+
+                                        lista +
+                                                "Introduce el numero del juego:"
+
+                                )
 
                         );
 
@@ -117,31 +126,26 @@ public class App {
 
                             listaVideojuegos.remove(juego);
 
-                            JOptionPane.showMessageDialog(
-                                    null,
-                                    "Se ha eliminado.");
+                            JOptionPane.showMessageDialog(null, "Se ha eliminado.");
 
                         } else {
 
-                            JOptionPane.showMessageDialog(
-                                    null,
-                                    "Numero no valido.");
+                            JOptionPane.showMessageDialog(null, "Numero no valido.");
                         }
 
                     }
 
                     break;
                 }
-
                 case 4:
-                    
-                JOptionPane.showMessageDialog(null, "Saliendo...");
-                        
+
+                    JOptionPane.showMessageDialog(null, "Saliendo...");
+
                     break;
 
                 default:
 
-                   JOptionPane.showMessageDialog(null, "Opcion no valida.");
+                    JOptionPane.showMessageDialog(null, "Opcion no valida.");
             }
         }
 
