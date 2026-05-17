@@ -9,26 +9,67 @@ public class App {
     public static void main(String[] args) throws Exception {
 
         Scanner usuario = new Scanner(System.in);
+        int opcion = 0;
 
-        /*System.out.println("Vamos a buscar un videojuego, ");
-        System.out.println("introduce el nombre: ");
-        String nombre = usuario.nextLine();
+        while (opcion != 3) {
 
-        System.out.println("Introduce el género: ");
-        String genero = usuario.nextLine();
+            System.out.println("-OPCIONES-");
+            System.out.println("1- Añadir videojuego");
+            System.out.println("2-Ver videojuegos");
+            System.out.println("3- Salir del programa");
 
-        System.out.println("Introduce la plataforma: ");
-        String plataforma = usuario.nextLine();
+            opcion = usuario.nextInt();
+            usuario.nextLine();
 
-        System.out.println("Introduce la puntuación: ");
-        String puntuacion = usuario.nextLine();*/
+            switch (opcion) {
+                case 1:
+                    System.out.println("Vamos a buscar un videojuego, ");
+                    System.out.println("introduce el nombre: ");
+                    String nombre = usuario.nextLine();
 
-        Videojuego videojuego1 = new Videojuego("The Last Of Us II", "Terror de supervivencia", "PS4", 9);
-        listaVideojuegos.add(videojuego1);
+                    System.out.println("Introduce el género: ");
+                    String genero = usuario.nextLine();
 
-        for (Videojuego v : listaVideojuegos) {
-            System.out.println(v);
+                    System.out.println("Introduce la plataforma: ");
+                    String plataforma = usuario.nextLine();
+
+                    System.out.println("Introduce la puntuación: ");
+                    String puntuacion = usuario.nextLine();
+
+                    Videojuego usuarioJuego = new Videojuego();
+                    listaVideojuegos.add(usuarioJuego);
+
+                    System.out.println("Videojuego añadido.");
+
+                    break;
+
+                case 2:
+
+                    for (Videojuego juego : listaVideojuegos) {
+                        System.out.println(juego);
+                    }
+                
+                    case 3:
+                        System.out.println("Saliendo...");
+                        
+                        break;
+
+                default:
+                    System.out.println("Opción  no válida.");
+            }
         }
+        
+        usuario.close();
+
+        /*
+         * Videojuego videojuego1 = new Videojuego("The Last Of Us II",
+         * "Terror de supervivencia", "PS4", 9);
+         * listaVideojuegos.add(videojuego1);
+         * 
+         * for (Videojuego v : listaVideojuegos) {
+         * System.out.println(v);
+         * }
+         */
     }
 
 }
