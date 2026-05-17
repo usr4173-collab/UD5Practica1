@@ -48,4 +48,10 @@ public class Videojuego {
         return puntuacion;
     }
 
+@Override
+public String toString() {
+    return "Nombre: " + nombre + "\nGenero: " + genero +
+    "\nPlataforma: " + plataforma + "\nPuntuacion: " + puntuacion;
+}
+
 }
