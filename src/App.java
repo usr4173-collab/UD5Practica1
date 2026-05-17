@@ -1,8 +1,9 @@
 import net.salesianos.Videojuego;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Collections;
 import java.util.Comparator;
+
+import javax.swing.JOptionPane;
 
 /*Esta es la clase principal del programa, gestiona el menú
 y las funcionalidades del sistema del ranking de videojuegos. */
@@ -12,63 +13,64 @@ public class App {
 
     public static void main(String[] args) throws Exception {
 
-        Scanner usuario = new Scanner(System.in);
         int opcion = 0;
 
         while (opcion != 4) {
 
-            System.out.println("-OPCIONES-");
-            System.out.println("1- Añadir videojuego");
-            System.out.println("2-Ver videojuegos");
-            System.out.println("3-Eliminar videojuego");
-            System.out.println("4- Salir del programa");
+            String opcionTexto = JOptionPane.showInputDialog(
+                    "1- Añadir videojuego\n" +
+                            "2- Ver videojuegos\n" +
+                            "3- Eliminar videojuego\n" +
+                            "4- Salir del programa");
 
-            opcion = usuario.nextInt();
-            usuario.nextLine();
+            opcion = Integer.parseInt(opcionTexto);
 
             switch (opcion) {
                 case 1:
-                    System.out.println("Vamos a buscar un videojuego, ");
-                    System.out.println("introduce el nombre: ");
-                    String nombre = usuario.nextLine();
+                    String nombre = JOptionPane.showInputDialog(
+                            "Introduce el nombre:");
 
-                    System.out.println("Introduce el género: ");
-                    String genero = usuario.nextLine();
+                    String genero = JOptionPane.showInputDialog(
+                            "Introduce el género:");
 
-                    System.out.println("Introduce la plataforma: ");
-                    String plataforma = usuario.nextLine();
+                    String plataforma = JOptionPane.showInputDialog(
+                            "Introduce la plataforma:");
 
-                    System.out.println("Introduce la puntuación: ");
+                    int puntuacion = Integer.parseInt(JOptionPane.showInputDialog(
+                            "Introduce la puntuacion:")
 
-                    while (!usuario.hasNextInt()) {
-                        System.out.println("Introduce un número válido");
-                        usuario.next(); // Esto valida que el usuario escriba si o si un número y no rompa el programa
-                    }
-
-                    int puntuacion = usuario.nextInt();
-                    usuario.nextLine();
+                    );
 
                     while (puntuacion < 1 || puntuacion > 5) {
 
-                        System.out.println(
-                                "La puntuacion debe estar entre 1 y 5");
+                        puntuacion =
+                            Integer.parseInt(
 
-                        puntuacion = usuario.nextInt();
-                        usuario.nextLine();
+                                JOptionPane.showInputDialog(
+
+                                    "La puntuacion debe estar entre 1 y 5"
+
+                                )
+
+                            );
 
                     }
 
                     Videojuego usuarioJuego = new Videojuego(nombre, genero, plataforma, puntuacion);
                     listaVideojuegos.add(usuarioJuego);
 
-                    System.out.println("Videojuego añadido.");
+                    JOptionPane.showMessageDialog(
+                            null,
+                            "Videojuego añadido.");
 
                     break;
 
                 case 2:
 
                     if (listaVideojuegos.isEmpty()) {
-                        System.out.println("No hay videojuegos aún.");
+                        JOptionPane.showMessageDialog(
+                                null,
+                                "No hay videojuegos aún.");
                     } else {
 
                         /*
@@ -78,9 +80,13 @@ public class App {
 
                         Collections.sort(listaVideojuegos, Comparator.comparing(Videojuego::getPuntuacion).reversed());
 
+                        String lista = "";
+
                         for (Videojuego juego : listaVideojuegos) {
-                            System.out.println(juego);
+                            lista += juego + "\n";
                         }
+
+                        JOptionPane.showMessageDialog(null, lista);
                     }
 
                     break;
@@ -89,40 +95,36 @@ public class App {
 
                     if (listaVideojuegos.isEmpty()) {
 
-                        System.out.println(
-                                "No hay videojuegos para eliminar.");
+                        JOptionPane.showMessageDialog(null, "No hay videojuegos para eliminar.");
 
                     } else {
-                        for (int i = 0; i < listaVideojuegos.size(); i++) {
-                            System.out.println(i + " - " + listaVideojuegos.get(i).getNombre());
-                        }
+                        String lista = "";
 
-                        System.out.println("Introduce el número del juego que quieres borrar");
+                        for (int i = 0; i < listaVideojuegos.size(); i++) { 
+                                lista += i + " - " + listaVideojuegos.get(i).getNombre() + "\n";
+                            }
 
-                        while (!usuario.hasNextInt()) {
+                        int juego = Integer.parseInt(
 
-                            System.out.println("Error. Introduce un numero valido:");
+                                JOptionPane.showInputDialog(
+                                        "Introduce el numero del juego:")
 
-                            usuario.next();
-
-                        }
-
-                        int juego = usuario.nextInt();
-                        usuario.nextLine();
+                        );
 
                         if (juego >= 0 &&
                                 juego < listaVideojuegos.size()) {
 
                             listaVideojuegos.remove(juego);
 
-                            System.out.println(
+                            JOptionPane.showMessageDialog(
+                                    null,
                                     "Se ha eliminado.");
 
                         } else {
 
-                            System.out.println(
-                                    "Número no valido.");
-
+                            JOptionPane.showMessageDialog(
+                                    null,
+                                    "Numero no valido.");
                         }
 
                     }
@@ -131,16 +133,16 @@ public class App {
                 }
 
                 case 4:
-                    System.out.println("Saliendo...");
-
+                    
+                JOptionPane.showMessageDialog(null, "Saliendo...");
+                        
                     break;
 
                 default:
-                    System.out.println("Opción  no válida.");
+
+                   JOptionPane.showMessageDialog(null, "Opcion no valida.");
             }
         }
-
-        usuario.close();
 
         /*
          * Videojuego videojuego1 = new Videojuego("The Last Of Us II",
