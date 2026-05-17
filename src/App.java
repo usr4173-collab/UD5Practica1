@@ -11,18 +11,19 @@ public class App {
         Scanner usuario = new Scanner(System.in);
         int opcion = 0;
 
-        while (opcion != 3) {
+        while (opcion != 4) {
 
             System.out.println("-OPCIONES-");
             System.out.println("1- Añadir videojuego");
             System.out.println("2-Ver videojuegos");
-            System.out.println("3- Salir del programa");
+            System.out.println("3-Ver videojuegos");
+            System.out.println("4- Salir del programa");
 
             opcion = usuario.nextInt();
             usuario.nextLine();
 
             switch (opcion) {
-                case 1:
+                case 1: 
                     System.out.println("Vamos a buscar un videojuego, ");
                     System.out.println("introduce el nombre: ");
                     String nombre = usuario.nextLine();
@@ -34,24 +35,28 @@ public class App {
                     String plataforma = usuario.nextLine();
 
                     System.out.println("Introduce la puntuación: ");
-                    String puntuacion = usuario.nextLine();
+                    int puntuacion = usuario.nextInt();
 
-                    Videojuego usuarioJuego = new Videojuego();
+                    Videojuego usuarioJuego = new Videojuego(nombre, genero, plataforma, puntuacion);
                     listaVideojuegos.add(usuarioJuego);
 
                     System.out.println("Videojuego añadido.");
 
                     break;
-
+                
                 case 2:
 
                     for (Videojuego juego : listaVideojuegos) {
                         System.out.println(juego);
                     }
+
+                case 3: {
+                    
+                }
                 
-                    case 3:
+                    case 4:
                         System.out.println("Saliendo...");
-                        
+
                         break;
 
                 default:
