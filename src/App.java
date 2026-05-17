@@ -100,9 +100,10 @@ public class App {
                     } else {
                         String lista = "";
 
-                        for (int i = 0; i < listaVideojuegos.size(); i++) { 
-                                lista += i + " - " + listaVideojuegos.get(i).getNombre() + "\n";
-                            }
+                        for (int i = 0; i < listaVideojuegos.size(); i++) {
+                            lista += i + " - " + listaVideojuegos.get(i).getNombre() + "\n";
+                        }
+                            
 
                         int juego = Integer.parseInt(
 
