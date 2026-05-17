@@ -1,7 +1,11 @@
 import net.salesianos.Videojuego;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Collections;
+import java.util.Comparator;
 
+/*Esta es la clase principal del programa, gestiona el menú
+y las funcionalidades del sistema del ranking de videojuegos. */
 public class App {
 
     static ArrayList<Videojuego> listaVideojuegos = new ArrayList<>();
@@ -16,7 +20,7 @@ public class App {
             System.out.println("-OPCIONES-");
             System.out.println("1- Añadir videojuego");
             System.out.println("2-Ver videojuegos");
-            System.out.println("3-Ver videojuegos");
+            System.out.println("3-Eliminar videojuego");
             System.out.println("4- Salir del programa");
 
             opcion = usuario.nextInt();
@@ -35,7 +39,13 @@ public class App {
                     String plataforma = usuario.nextLine();
 
                     System.out.println("Introduce la puntuación: ");
+                    while (!usuario.hasNextInt()) {
+                        System.out.println("Introduce un número válido");
+                        usuario.next(); //Esto valida que el usuario escriba si o si un número y no rompa el programa
+                    }
+
                     int puntuacion = usuario.nextInt();
+                    usuario.nextLine();
 
                     Videojuego usuarioJuego = new Videojuego(nombre, genero, plataforma, puntuacion);
                     listaVideojuegos.add(usuarioJuego);
@@ -46,12 +56,32 @@ public class App {
                 
                 case 2:
 
+                    /*Investigué sobre cómo comparar y ordenar la lista sin escribir tanto código
+                    y podemos hacerlo importando las librerías Collection y Comparator*/
+                    Collections.sort(listaVideojuegos, Comparator.comparing(Videojuego::getPuntuacion).reversed());
+
                     for (Videojuego juego : listaVideojuegos) {
                         System.out.println(juego);
                     }
+                    
+                break;
 
                 case 3: {
-                    
+
+                    for(int i = 0; i < listaVideojuegos.size(); i++) {
+                        System.out.println(i + " - " + listaVideojuegos.get(i).getNombre());
+                    }
+
+                    System.out.println("Introduce el número del juego que quieres borrar");
+
+                    int juego = usuario.nextInt();
+                    usuario.nextLine();
+
+                    listaVideojuegos.remove(juego);
+
+                    System.out.println("Se ha eliminado.");
+
+                    break;
                 }
                 
                     case 4:
